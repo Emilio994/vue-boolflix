@@ -17,16 +17,19 @@ const app = new Vue ({
             let myQuery = '&query=';
             let myLanguage = '&language=it-IT'
             let searchQuery = searchPath + myApiKey + myLanguage + myQuery + this.mySearch;
+            if (this.mySearch == '') {
+                this.myMovies = [];
+            }
             axios.
             get(searchPath + this.mySearch).
             then(result => {
                 console.log(result);
                 this.myMovies = [];
+                this.mySearch = '';
                 result.data.results.forEach(element => {
                     this.myMovies.push(element);                    
                 });
-                console.log(this.myMovies);
-                this.mySearch = '';
+                console.log(this.myMovies);                
             })
         },
         clearAll() {
