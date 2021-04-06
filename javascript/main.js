@@ -9,6 +9,7 @@ const app = new Vue ({
         mySearch : '',
         myMovies : []
     },
+
     methods : {
         sendQuery() {
             let myApiKey = 'api_key=9d3349e61a70c22260c6a2009d12ddf7';
@@ -26,9 +27,11 @@ const app = new Vue ({
                 });
                 console.log(this.myMovies);
             })
+        },
+        clearAll() {
             this.mySearch = '';
-        }
-        
+            this.myMovies = [];
+        }       
     }
 })
 

@@ -10,21 +10,41 @@ body {
 }
 
 /* Header-Wrapper */
+.header-wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  height: 15vh;
+  width: 100%;
+}
+.header-wrapper *{
+  width: 25%;
+  margin: 10px 0px;
+}
+
 /* Body-wrapper */
 .body-wrapper {
+  width: 100%;
   padding : 10px;
   display: flex;
-  flex-wrap: wrap;
+  flex-flow: wrap;
   justify-content: flex-start;
   align-items: flex-start;
 }
 
+
 .body-wrapper .movie-template {
   display: flex;
   flex-flow: column nowrap;
-  margin: 0px 20px;
+  justify-content: center;
+  text-align: center;
+  margin: 20px;
   flex-basis : calc(100% / 5 - 40px);
   border: 1px solid black;
+  height: 20vh;
+  overflow: hidden;
 }
 
 

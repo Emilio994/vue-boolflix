@@ -13,7 +13,7 @@
   </head>
   <body>
 
-    <div id='root'>
+    <div id='root' @keyup.esc='clearAll'>
       <!-- Header Wrapper -->
       <div class="header-wrapper">
         <input @keyup.enter='sendQuery' v-model='mySearch' type="text">
@@ -22,13 +22,18 @@
 
       <!-- Body Wrapper -->
       <div class="body-wrapper">
-        <div v-for='(movie, index) in myMovies'class="movie-template">
+        <!-- Movie template -->
+        <div v-if='myMovies.length == 0'>
+          <h1>Please search a movie</h1>
+        </div>
+
+        <div v-else v-for='(movie, index) in myMovies'class="movie-template">
           <img src="" alt="">
           <p>{{ movie.title }}</p>
           <p>{{ movie.original_title }}</p>
           <p>{{ movie.original_language }}</p>
           <p>{{ movie.vote_average }}</p>
-        </div>
+        </div>       
 
       </div>
 
