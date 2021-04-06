@@ -26,6 +26,7 @@ const app = new Vue ({
                 });
                 console.log(this.myMovies);
             })
+            this.mySearch = '';
         }
         
     }
