@@ -26,6 +26,7 @@ const app = new Vue ({
                     this.myMovies.push(element);                    
                 });
                 console.log(this.myMovies);
+                this.mySearch = '';
             })
         },
         clearAll() {
