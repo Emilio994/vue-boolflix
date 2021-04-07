@@ -28,7 +28,10 @@
         </div>
 
         <div v-else v-for='(movie, index) in myMovies' class="movie-template">
-          <img src="" alt="">
+          <div class="poster_container">
+            <img class='movie_poster' v-if='movie.poster_path != null' :src=" myPosterPath + movie.poster_path" alt="Poster">
+            <img class='movie_poster' v-else src="https://blog.hubspot.com/hubfs/Shrug-Emoji.jpg" alt="Null">
+          </div>          
           <p>{{ (movie.title != undefined) ? movie.title : movie.name }}</p>
           <p>{{ (movie.original_title != undefined) ? movie.original_title : movie.original_name }}</p>
           <p v-if='languages404.includes(movie.original_language)'>{{ movie.original_language }}</p>

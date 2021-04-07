@@ -9,7 +9,8 @@ const app = new Vue ({
         mySearch : '',
         myMovies : [],
         myLanguages : [],
-        languages404 : ['ja','ko','ur','hi','cs']
+        languages404 : ['ja','ko','ur','hi','cs'],
+        myPosterPath : 'https://image.tmdb.org/t/p/w342'
     },
 
     methods : {
@@ -18,6 +19,7 @@ const app = new Vue ({
                 this.myMovies = [];
             }
             else {
+                // Predisposizione fattori di ricerca
                 let myApiKey = 'api_key=9d3349e61a70c22260c6a2009d12ddf7';
                 let searchMovie = 'https://api.themoviedb.org/3/search/movie?';
                 let searchTvSerie = 'https://api.themoviedb.org/3/search/tv?';
@@ -40,6 +42,7 @@ const app = new Vue ({
                         };                                    
                     });
                 });
+
                 // Ricerca Serie TV
                 axios
                 .get(searchTvSerieQuery)
@@ -49,15 +52,16 @@ const app = new Vue ({
                         if (!this.myLanguages.includes(element.original_language)) {
                             this.myLanguages.push(element.original_language)
                         };
-                    })
-                    console.log(result);
-                })             
+                    });
+                });             
             }
-        },              
+        }, 
+
         clearAll() {
             this.mySearch = '';
             this.myMovies = [];
         },
+
         starsRating(movie) {
             let halfValue = movie.vote_average / 2;
             let myRating = Math.ceil(halfValue);
