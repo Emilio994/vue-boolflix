@@ -27,12 +27,12 @@
           <h1>Please search a movie</h1>
         </div>
 
-        <div v-else v-for='(movie, index) in myMovies'class="movie-template">
+        <div v-else v-for='(movie, index) in myMovies' class="movie-template">
           <img src="" alt="">
           <p>{{ movie.title }}</p>
           <p>{{ movie.original_title }}</p>
           <p>{{ movie.original_language }}</p>
-          <p>{{ movie.vote_average }}</p>
+          <p v-html='starsRating(movie)'></p>
         </div>       
 
       </div>

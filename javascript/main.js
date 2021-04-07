@@ -22,8 +22,8 @@ const app = new Vue ({
                 let myLanguage = '&language=it-IT'
                 let searchQuery = searchPath + myApiKey + myLanguage + myQuery + this.mySearch;
                 axios.
-                get(searchPath + this.mySearch).
-                then(result => {
+                get(searchQuery)
+                .then(result => {
                 console.log(result);
                 this.myMovies = [];
                 this.mySearch = '';
@@ -32,15 +32,31 @@ const app = new Vue ({
                 });
                 console.log(this.myMovies);                
                 });
-            }      
-            
+            }           
             
         },
         clearAll() {
             this.mySearch = '';
             this.myMovies = [];
-        }       
-    }
+        },
+        starsRating(movie) {
+            let halfValue = movie.vote_average / 2;
+            let myRating = Math.ceil(halfValue);
+            let myRest = 5 - myRating;
+            let myStars = '';
+
+            for (let i = 0; i < myRating; i++) {
+                myStars += '<i class="fas fa-star"></i>'
+            }
+
+            for (let i = 0; i < myRest; i++) {
+                myStars += '<i class="far fa-star"></i>'
+            }
+
+            return myStars;
+        }     
+    },
+    
 })
 
 
