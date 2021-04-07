@@ -34,7 +34,7 @@
         <div v-for='(movie, index) in myMovies' class="movie-template">
           <div class="poster_container">
             <img class='movie_poster' v-if='movie.poster_path != null' :src=" myPosterPath + movie.poster_path" alt="Poster">
-            <img class='movie_poster' v-else src="https://blog.hubspot.com/hubfs/Shrug-Emoji.jpg" alt="Null">
+            <img class='movie_poster unavaible' v-else src="img/shrug.png" alt="Null">
           </div>
           <div class="description_container">
             <p>{{ (movie.title != undefined) ? movie.title : movie.name }}</p>

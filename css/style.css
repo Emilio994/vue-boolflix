@@ -102,7 +102,7 @@ body {
   text-align: center;
 }
 .body-wrapper .movie-template {
-  filter: drop-shadow(0px 0px 4px white);
+  filter: drop-shadow(0px 0px 2.5px white);
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
@@ -110,9 +110,10 @@ body {
   align-items: center;
   margin: 20px;
   flex-basis : calc(100% / 5 - 40px);
-  border: 1px solid black;
   height: 40vh;
   position: relative;
+  border-radius: 10px;
+  overflow: hidden;
 }
 .body-wrapper .movie-template:hover .description_container {
   display: flex;  
@@ -122,11 +123,16 @@ body {
   height: 100%;
   width: 100%;
 }
-.body-wrapper .movie-template .poster_container img {
+.body-wrapper .movie-template .poster_container .movie_poster {
   height: 100%;
   width: 100%;
   object-fit: cover;
 }
+.body-wrapper .movie-template .poster_container .movie_poster.unavaible {
+  background: rgba(255, 255, 255, 0.5);
+  object-fit:scale-down;
+}
+
 .body-wrapper .movie-template .description_container {
   padding: 10px;
   display: none;
