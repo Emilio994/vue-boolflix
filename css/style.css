@@ -22,7 +22,6 @@ body {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 2px white; 
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb {
@@ -45,6 +44,9 @@ body {
 .header-wrapper img {
   width: 20%;
   align-self: flex-start;
+}
+.header-wrapper img:hover {
+  cursor: pointer;
 }
 .header-wrapper .searchgroup {
   align-self: flex-end;
@@ -149,9 +151,19 @@ body {
   overflow: hidden;
 }
 .body-wrapper .movie-template .description_container .movie-description {
+  padding: 3px 10px;
   height: 35%;
   width: 100%;
   overflow: auto;
+}
+.body-wrapper .movie-template .description_container .movie-description::-webkit-scrollbar {
+  width: 5px;
+}
+.body-wrapper .movie-template .description_container h3 {
+  color: red;
+}
+.body-wrapper .movie-template .description_container .movie-description p {
+  font-size: 13px;
 }
 .body-wrapper .movie-template .description_container .stars {
   color: yellow;

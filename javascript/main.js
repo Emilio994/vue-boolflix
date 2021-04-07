@@ -71,11 +71,6 @@ const app = new Vue ({
             };
         }, 
 
-        clearAll() {
-            this.mySearch = '';
-            this.myMovies = [];
-        },
-
         starsRating(movie) {
             let halfValue = movie.vote_average / 2;
             let myRating = Math.ceil(halfValue);
@@ -101,6 +96,10 @@ const app = new Vue ({
             let myStyle = 'flat/64.png';
             let myFlag = myPath + myCountry + myStyle;
             return myFlag;
+        },
+
+        reloadPage() {
+            location.reload()
         }
 
     },

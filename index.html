@@ -13,10 +13,10 @@
   </head>
   <body>
 
-    <div id='root' @keyup.esc='clearAll'>
+    <div id='root'>
       <!-- Header Wrapper -->
       <div class="header-wrapper">
-        <img src="img/boolflix.png" alt="">
+        <img @click='reloadPage'src="img/boolflix.png" alt="">
         <div class="searchgroup">
           <input @keyup.enter='sendQuery' v-model='mySearch' type="text">
           <button @click='sendQuery'><i class="fas fa-search"></i></button>
@@ -37,8 +37,8 @@
             <img class='movie_poster unavaible' v-else src="img/shrug.png" alt="Null">
           </div>
           <div class="description_container">
-            <p>{{ (movie.title != undefined) ? movie.title : movie.name }}</p>
-            <p>{{ (movie.original_title != undefined) ? movie.original_title : movie.original_name }}</p>
+            <h3>{{ (movie.title != undefined) ? movie.title : movie.name }}</h3>
+            <h5>{{ (movie.original_title != undefined) ? movie.original_title : movie.original_name }}</h5>
             <p v-if='languages404.includes(movie.original_language)'>{{ movie.original_language.toUpperCase() }}</p>
             <p><img v-if='!languages404.includes(movie.original_language)' :src='toFlag(movie)' alt="Flag"> </p>
             <p class ='stars' v-html='starsRating(movie)'></p>
