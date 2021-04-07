@@ -160,10 +160,14 @@ body {
   width: 5px;
 }
 .body-wrapper .movie-template .description_container h3 {
+  font-style: italic;
   color: red;
 }
-.body-wrapper .movie-template .description_container .movie-description p {
+.body-wrapper .movie-template .description_container .movie-description .movie_text {
   font-size: 13px;
+}
+.body-wrapper .movie-template .description_container .movie-description .movie_text.filled {
+  text-align: start;
 }
 .body-wrapper .movie-template .description_container .stars {
   color: yellow;

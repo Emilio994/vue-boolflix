@@ -43,7 +43,8 @@
             <p><img v-if='!languages404.includes(movie.original_language)' :src='toFlag(movie)' alt="Flag"> </p>
             <p class ='stars' v-html='starsRating(movie)'></p>
             <div class="movie-description">
-              <p class="movie_text"> {{ (movie.overview != '') ? movie.overview : 'No description' }}</p>
+              <p class="movie_text filled" v-if='movie.overview != ""'> {{ movie.overview }}</p>
+              <p v-if='movie.overview == ""' class="movie_text"> No description</p>
             </div>
             
           </div>          
