@@ -118,7 +118,7 @@ body {
   overflow: hidden;
 }
 .body-wrapper .movie-template:hover .description_container {
-  display: flex;  
+  opacity: 1;  
 }
 
 .body-wrapper .movie-template .poster_container {
@@ -137,7 +137,8 @@ body {
 
 .body-wrapper .movie-template .description_container {
   padding: 10px;
-  display: none;
+  opacity: 0;
+  display: flex;
   flex-flow: column nowrap;
   justify-content: space-evenly;
   align-items: center;
@@ -149,6 +150,7 @@ body {
   color: white;
   position: absolute;
   overflow: hidden;
+  transition: 0.2s;
 }
 .body-wrapper .movie-template .description_container .movie-description {
   padding: 3px 10px;
