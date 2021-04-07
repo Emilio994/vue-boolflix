@@ -11,7 +11,6 @@ const app = new Vue ({
         myLanguages : [],
         languages404 : ['ko','ur','hi','cs'],
         myPosterPath : 'https://image.tmdb.org/t/p/w342',
-        mySearchInput : false
     },
 
     mounted() {
