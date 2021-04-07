@@ -29,9 +29,10 @@
 
         <div v-else v-for='(movie, index) in myMovies' class="movie-template">
           <img src="" alt="">
-          <p>{{ movie.title }}</p>
-          <p>{{ movie.original_title }}</p>
-          <p>{{ movie.original_language }}</p>
+          <p>{{ (movie.title != undefined) ? movie.title : movie.name }}</p>
+          <p>{{ (movie.original_title != undefined) ? movie.original_title : movie.original_name }}</p>
+          <p v-if='languages404.includes(movie.original_language)'>{{ movie.original_language }}</p>
+          <p><img v-if='!languages404.includes(movie.original_language)' :src='toFlag(movie)' alt="Flag"> </p>
           <p v-html='starsRating(movie)'></p>
         </div>       
 

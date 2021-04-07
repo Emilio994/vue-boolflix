@@ -7,7 +7,9 @@ const app = new Vue ({
     el : '#root',
     data : {
         mySearch : '',
-        myMovies : []
+        myMovies : [],
+        myLanguages : [],
+        languages404 : ['ja','ko','ur','hi','cs']
     },
 
     methods : {
@@ -17,24 +19,41 @@ const app = new Vue ({
             }
             else {
                 let myApiKey = 'api_key=9d3349e61a70c22260c6a2009d12ddf7';
-                let searchPath = 'https://api.themoviedb.org/3/search/movie?api_key=9d3349e61a70c22260c6a2009d12ddf7&query=';
+                let searchMovie = 'https://api.themoviedb.org/3/search/movie?';
+                let searchTvSerie = 'https://api.themoviedb.org/3/search/tv?';
                 let myQuery = '&query=';
                 let myLanguage = '&language=it-IT'
-                let searchQuery = searchPath + myApiKey + myLanguage + myQuery + this.mySearch;
-                axios.
-                get(searchQuery)
-                .then(result => {
-                console.log(result);
+                let searchMovieQuery = searchMovie + myApiKey + myLanguage + myQuery + this.mySearch;
+                let searchTvSerieQuery = searchTvSerie + myApiKey + myLanguage + myQuery + this.mySearch;
                 this.myMovies = [];
                 this.mySearch = '';
-                result.data.results.forEach(element => {
-                    this.myMovies.push(element);                    
+                this.myLanguages = [];
+                
+                // Ricerca Film
+                axios
+                .get(searchMovieQuery)
+                .then(result => {
+                    result.data.results.forEach(element => {
+                        this.myMovies.push(element);
+                        if (!this.myLanguages.includes(element.original_language)) {
+                            this.myLanguages.push(element.original_language)
+                        };                                    
+                    });
                 });
-                console.log(this.myMovies);                
-                });
-            }           
-            
-        },
+                // Ricerca Serie TV
+                axios
+                .get(searchTvSerieQuery)
+                .then(result => {
+                    result.data.results.forEach(element => {
+                        this.myMovies.push(element);
+                        if (!this.myLanguages.includes(element.original_language)) {
+                            this.myLanguages.push(element.original_language)
+                        };
+                    })
+                    console.log(result);
+                })             
+            }
+        },              
         clearAll() {
             this.mySearch = '';
             this.myMovies = [];
@@ -54,7 +73,16 @@ const app = new Vue ({
             }
 
             return myStars;
-        }     
+        },
+
+        toFlag(movie) {
+            let myPath = 'https://www.countryflags.io/';
+            let myCountry = movie.original_language + '/';
+            if (movie.original_language === 'en') {myCountry = 'gb/'};
+            let myStyle = 'flat/64.png';
+            let myFlag = myPath + myCountry + myStyle;
+            return myFlag;
+        },
     },
     
 })
