@@ -16,27 +16,38 @@
     <div id='root' @keyup.esc='clearAll'>
       <!-- Header Wrapper -->
       <div class="header-wrapper">
-        <input @keyup.enter='sendQuery' v-model='mySearch' type="text">
-        <button @click ='sendQuery'><i class="fas fa-search"></i></button>
+        <img src="img/boolflix.png" alt="">
+        <div class="searchgroup">
+          <input @keyup.enter='sendQuery' v-model='mySearch' type="text">
+          <button @click='sendQuery'><i class="fas fa-search"></i></button>
+        </div>
+        
       </div>
 
       <!-- Body Wrapper -->
       <div class="body-wrapper">
-        <!-- Movie template -->
-        <div v-if='myMovies.length == 0'>
+        <div v-if='myMovies.length == 0' class="nothing_displayed">
           <h1>Please search a movie</h1>
         </div>
-
-        <div v-else v-for='(movie, index) in myMovies' class="movie-template">
+        
+        <!-- Movie template -->
+        <div v-for='(movie, index) in myMovies' class="movie-template">
           <div class="poster_container">
             <img class='movie_poster' v-if='movie.poster_path != null' :src=" myPosterPath + movie.poster_path" alt="Poster">
             <img class='movie_poster' v-else src="https://blog.hubspot.com/hubfs/Shrug-Emoji.jpg" alt="Null">
+          </div>
+          <div class="description_container">
+            <p>{{ (movie.title != undefined) ? movie.title : movie.name }}</p>
+            <p>{{ (movie.original_title != undefined) ? movie.original_title : movie.original_name }}</p>
+            <p v-if='languages404.includes(movie.original_language)'>{{ movie.original_language.toUpperCase() }}</p>
+            <p><img v-if='!languages404.includes(movie.original_language)' :src='toFlag(movie)' alt="Flag"> </p>
+            <p class ='stars' v-html='starsRating(movie)'></p>
+            <div class="movie-description">
+              <p class="movie_text"> {{ (movie.overview != '') ? movie.overview : 'No description' }}</p>
+            </div>
+            
           </div>          
-          <p>{{ (movie.title != undefined) ? movie.title : movie.name }}</p>
-          <p>{{ (movie.original_title != undefined) ? movie.original_title : movie.original_name }}</p>
-          <p v-if='languages404.includes(movie.original_language)'>{{ movie.original_language }}</p>
-          <p><img v-if='!languages404.includes(movie.original_language)' :src='toFlag(movie)' alt="Flag"> </p>
-          <p v-html='starsRating(movie)'></p>
+          
         </div>       
 
       </div>

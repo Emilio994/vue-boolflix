@@ -9,8 +9,20 @@ const app = new Vue ({
         mySearch : '',
         myMovies : [],
         myLanguages : [],
-        languages404 : ['ja','ko','ur','hi','cs'],
-        myPosterPath : 'https://image.tmdb.org/t/p/w342'
+        languages404 : ['ko','ur','hi','cs'],
+        myPosterPath : 'https://image.tmdb.org/t/p/w342',
+        mySearchInput : false
+    },
+
+    mounted() {
+        axios
+        .get('https://api.themoviedb.org/3/search/movie?api_key=9d3349e61a70c22260c6a2009d12ddf7&language=it-IT&query=best')
+        .then(result => {
+            result.data.results.forEach(element => {
+                this.myMovies.push(element);
+            })
+        })
+
     },
 
     methods : {
@@ -37,6 +49,7 @@ const app = new Vue ({
                 .then(result => {
                     result.data.results.forEach(element => {
                         this.myMovies.push(element);
+                        console.log(element)
                         if (!this.myLanguages.includes(element.original_language)) {
                             this.myLanguages.push(element.original_language)
                         };                                    
@@ -49,12 +62,13 @@ const app = new Vue ({
                 .then(result => {
                     result.data.results.forEach(element => {
                         this.myMovies.push(element);
+                        console.log(element)
                         if (!this.myLanguages.includes(element.original_language)) {
                             this.myLanguages.push(element.original_language)
                         };
                     });
                 });             
-            }
+            };
         }, 
 
         clearAll() {
@@ -83,10 +97,12 @@ const app = new Vue ({
             let myPath = 'https://www.countryflags.io/';
             let myCountry = movie.original_language + '/';
             if (movie.original_language === 'en') {myCountry = 'gb/'};
+            if (movie.original_language === 'ja') {myCountry ='jp/'};
             let myStyle = 'flat/64.png';
             let myFlag = myPath + myCountry + myStyle;
             return myFlag;
-        },
+        }
+
     },
     
 })
