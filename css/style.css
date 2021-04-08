@@ -12,12 +12,6 @@ body {
 }
 
 /* Utilities */
-.clearfix {
-  content: '';
-  display: table;
-  clear: both;
-}
-
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -103,8 +97,10 @@ body {
 .body-wrapper .nothing_displayed h1 {
   text-align: center;
 }
+
+/* Movie Template */
 .body-wrapper .movie-template {
-  filter: drop-shadow(0px 0px 2.5px white);
+  filter: drop-shadow(0px 0px 2px white);
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
@@ -117,10 +113,9 @@ body {
   border-radius: 10px;
   overflow: hidden;
 }
-.body-wrapper .movie-template:hover .description_container {
-  opacity: 1;  
-}
 
+
+/* Movie Template Poster */
 .body-wrapper .movie-template .poster_container {
   height: 100%;
   width: 100%;
@@ -135,6 +130,7 @@ body {
   object-fit:scale-down;
 }
 
+/* Movie template description */
 .body-wrapper .movie-template .description_container {
   padding: 10px;
   opacity: 0;
@@ -152,11 +148,17 @@ body {
   overflow: hidden;
   transition: 0.2s;
 }
+.body-wrapper .movie-template:hover .description_container {
+  opacity: 1;  
+}
 .body-wrapper .movie-template .description_container .movie-description {
   padding: 3px 10px;
   height: 35%;
   width: 100%;
   overflow: auto;
+}
+.body-wrapper .movie-template .description_container:hover {
+  cursor: pointer;
 }
 .body-wrapper .movie-template .description_container .movie-description::-webkit-scrollbar {
   width: 5px;
@@ -171,9 +173,68 @@ body {
 .body-wrapper .movie-template .description_container .movie-description .movie_text.filled {
   text-align: start;
 }
-.body-wrapper .movie-template .description_container .stars {
+.body-wrapper i {
   color: yellow;
 }
+
+/* Focus template */
+.focus_movie {
+  position: fixed;
+  height: 60vh;
+  width: 60vw;
+  background-color: rgba(48, 48, 48, 0.8);
+  color: white;
+  filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.8));
+  transform: translate(-50%, -50%);
+  box-shadow: 0px 0px 10px 0px red;
+  top: 50%;
+  left: 50%;
+  border-radius: 20px;
+  padding: 15px;
+  transition: 1s;
+}
+.focus_close {
+  text-align: end;
+  margin: -1px 5px;
+}
+.focus_close i  {
+  text-align: end;
+  color: white;
+  font-size: 25px;
+  transition: 0.2s;
+}
+.focus_close i:hover {
+  color: red;
+}
+.focus_close i:active {
+  transform: scale(1.4);
+}
+.focus_movie .focus_title {
+  text-align: center;
+  height: 30%;
+  width: 100%;
+}
+.focus_movie .focus_title h2 {
+  font-size: 40px;
+}
+.focus_movie .focus_description {
+  width: 90%;
+  height: 40%;
+  margin: 0 auto;
+  overflow: auto;
+}
+.focus_movie .focus_description::-webkit-scrollbar {
+  width: 5px;
+}
+.focus_movie .focus_description .movie_text {
+  text-align: center;
+}
+.focus_movie .stars {
+  margin-top: 15px;
+}
+
+
+
 
 
 

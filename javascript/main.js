@@ -8,9 +8,9 @@ const app = new Vue ({
     data : {
         mySearch : '',
         myMovies : [],
-        myLanguages : [],
-        languages404 : ['ko','ur','hi','cs'],
+        languages404 : ['zh','xx','ko','ur','hi','cs'],
         myPosterPath : 'https://image.tmdb.org/t/p/w342',
+        wholeFocus : false
     },
 
     mounted() {
@@ -18,7 +18,9 @@ const app = new Vue ({
         .get('https://api.themoviedb.org/3/search/movie?api_key=9d3349e61a70c22260c6a2009d12ddf7&language=it-IT&query=best')
         .then(result => {
             result.data.results.forEach(element => {
+                element.onFocus = false;
                 this.myMovies.push(element);
+                console.log(element)
             })
         })
 
@@ -40,18 +42,14 @@ const app = new Vue ({
                 let searchTvSerieQuery = searchTvSerie + myApiKey + myLanguage + myQuery + this.mySearch;
                 this.myMovies = [];
                 this.mySearch = '';
-                this.myLanguages = [];
                 
                 // Ricerca Film
                 axios
                 .get(searchMovieQuery)
                 .then(result => {
                     result.data.results.forEach(element => {
-                        this.myMovies.push(element);
-                        console.log(element)
-                        if (!this.myLanguages.includes(element.original_language)) {
-                            this.myLanguages.push(element.original_language)
-                        };                                    
+                        element.onFocus = false;
+                        this.myMovies.push(element);                                 
                     });
                 });
 
@@ -60,11 +58,8 @@ const app = new Vue ({
                 .get(searchTvSerieQuery)
                 .then(result => {
                     result.data.results.forEach(element => {
+                        element.onFocus = false;
                         this.myMovies.push(element);
-                        console.log(element)
-                        if (!this.myLanguages.includes(element.original_language)) {
-                            this.myLanguages.push(element.original_language)
-                        };
                     });
                 });             
             };
@@ -79,11 +74,9 @@ const app = new Vue ({
             for (let i = 0; i < myRating; i++) {
                 myStars += '<i class="fas fa-star"></i>'
             }
-
             for (let i = 0; i < myRest; i++) {
                 myStars += '<i class="far fa-star"></i>'
             }
-
             return myStars;
         },
 
@@ -99,7 +92,28 @@ const app = new Vue ({
 
         reloadPage() {
             location.reload()
+        },
+
+        tabFocus(movie) {
+            let app = this;
+            this.myMovies.forEach(element =>{
+                element.onFocus = false;
+                app.wholeFocus = false;
+            })
+            let myWait = setTimeout(function() {
+                movie.onFocus = true;
+                app.wholeFocus = true;
+            }, 150)         
+        },
+
+        tabClose(movie) {
+            let app = this;
+            let myWait = setTimeout(function() {
+                movie.onFocus = false
+                app.wholeFocus = false;
+            }, 100)
         }
+
 
     },
     
