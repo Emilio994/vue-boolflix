@@ -14,7 +14,7 @@
   <body>
 
     <div id='root'>
-      <div class="whole-wrapper">
+      <div v-if='readyStatus == true' class="whole-wrapper">
         <!-- Header Wrapper -->
         <div :style='(wholeFocus == true) ? "opacity : 0.4" : null' class="header-wrapper">
           <img @click='reloadPage'src="img/boolflix.png" alt="">

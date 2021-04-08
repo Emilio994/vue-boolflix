@@ -12,10 +12,13 @@ const app = new Vue ({
         languages404 : ['zh','xx','ko','ur','hi','cs'],
         myPosterPath : 'https://image.tmdb.org/t/p/w342',
         wholeFocus : false,
-        mySelect : 'Home'
+        mySelect : 'Home',
+        readyStatus : false 
+        /*l'intero contenuto della root verrà montato quando questo stato passerà a true, renderizzando l'istanza alla soddisfazione della promessa (finally) di axios, permettendo di raccogliere le informazioni necessarie prima della composizione */
     },
 
     mounted() {
+        let myApp = this;
         // Homepage
         axios
         .get('https://api.themoviedb.org/3/search/movie?api_key=9d3349e61a70c22260c6a2009d12ddf7&language=it-IT&query=best')
@@ -75,14 +78,21 @@ const app = new Vue ({
                 if (!this.allGenres.includes(element.name)) {this.allGenres.push(element.name)}
             });
 
-        });     
+        })
+        .finally(() => {
+            myApp.readyStatus = true;
+
+        })     
     },
 
 
     methods : {
         sendQuery() {
+            let myApp = this;
+            myApp.readyStatus = false;
             if (this.mySearch == '') {
                 this.myMovies = [];
+                myApp.readyStatus = true;
             }
             else {
                 // Predisposizione fattori di ricerca
@@ -144,9 +154,11 @@ const app = new Vue ({
                         .then(result => {
                             result.data.genres.forEach(element => {
                                 movie.genres.push(element.name);
-                            })
-                        })
-                    })
+                            });
+                        });
+                        myApp.readyStatus = true;
+
+                    });
                 });
                 
             };
