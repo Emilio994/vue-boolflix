@@ -123,7 +123,6 @@ const app = new Vue ({
                         element.genres = [];
                         this.myMovies.push(element);
                     });
-                
                 })
                 .finally(() => {
                     this.myMovies.forEach(movie => {
@@ -141,7 +140,7 @@ const app = new Vue ({
                         .then(result => {
                             let movieCast = result.data.cast;
                             if (movieCast.length > 0) {
-                                for (let i = 0; i < 5; i++) {
+                                for (let i = 0; i < 5 && i < movieCast.length; i++) {
                                     movie.actors.push(movieCast[i].name)
                                 };    
                             };        
@@ -158,7 +157,6 @@ const app = new Vue ({
                         });
                     });
                 });
-                
             };
         }, 
 
