@@ -75,8 +75,7 @@ const app = new Vue ({
                 if (!this.allGenres.includes(element.name)) {this.allGenres.push(element.name)}
             });
 
-        }); 
-        console.log(this.myMovies);       
+        });     
     },
 
 
@@ -179,6 +178,7 @@ const app = new Vue ({
         },
 
         reloadPage() {
+            this.mySelect = 'Home'
             location.reload()
         },
 
