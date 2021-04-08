@@ -20,6 +20,7 @@ const app = new Vue ({
             result.data.results.forEach(element => {
                 element.onFocus = false;
                 element.actors = [];
+                element.genres = [];
                 this.myMovies.push(element);
                 
             })
@@ -28,19 +29,25 @@ const app = new Vue ({
             this.myMovies.forEach(movie => {
                 let myPath = 'https://api.themoviedb.org/3/movie/';
                 let myResultId = movie.id;
-                let myParam = '/credits?'
+                let myCastParam = '/credits?'
                 let myApiKey = 'api_key=9d3349e61a70c22260c6a2009d12ddf7';
                 let myLanguage = '&language=it-IT';
-                let myRequest = myPath + myResultId + myParam + myApiKey + myLanguage;                
+                let myCastRequest = myPath + myResultId + myCastParam + myApiKey + myLanguage;
+                let myGenreRequest = myPath + myResultId + '?' + myApiKey + myLanguage;             
                 axios
-                .get(myRequest)
+                .get(myCastRequest)
                 .then(result => {
-                    // console.log(result.data.cast)
                     let movieCast = result.data.cast;
                     for (let i = 0; i < 5; i++) {
-                        // console.log(movieCast[i].name)
                         movie.actors.push(movieCast[i].name)
                     }            
+                });
+                axios
+                .get(myGenreRequest)
+                .then(result => {
+                    result.data.genres.forEach(element => {
+                        movie.genres.push(element.name);
+                    })
                 })
             })
         })
@@ -71,6 +78,7 @@ const app = new Vue ({
                     result.data.results.forEach(element => {
                         element.onFocus = false;
                         element.actors = [];
+                        element.genres = [];
                         this.myMovies.push(element);                                 
                     });
                 });
@@ -82,6 +90,7 @@ const app = new Vue ({
                     result.data.results.forEach(element => {
                         element.onFocus = false;
                         element.actors = [];
+                        element.genres = [];
                         this.myMovies.push(element);
                     });
                 
@@ -90,12 +99,13 @@ const app = new Vue ({
                     this.myMovies.forEach(movie => {
                         let myPath = 'https://api.themoviedb.org/3/movie/';
                         let myResultId = movie.id;
-                        let myParam = '/credits?'
+                        let myCastParam = '/credits?'
                         let myApiKey = 'api_key=9d3349e61a70c22260c6a2009d12ddf7';
                         let myLanguage = '&language=it-IT';
-                        let myRequest = myPath + myResultId + myParam + myApiKey + myLanguage;              
+                        let myCastRequest = myPath + myResultId + myCastParam + myApiKey + myLanguage;
+                        let myGenreRequest = myPath + myResultId + '?' + myApiKey + myLanguage;              
                         axios
-                        .get(myRequest)
+                        .get(myCastRequest)
                         .then(result => {
                             console.log(result.data.cast)
                             let movieCast = result.data.cast;
@@ -103,6 +113,13 @@ const app = new Vue ({
                                 console.log(movieCast[i].name)
                                 movie.actors.push(movieCast[i].name)
                             }            
+                        });
+                        axios
+                        .get(myGenreRequest)
+                        .then(result => {
+                            result.data.genres.forEach(element => {
+                                movie.genres.push(element.name);
+                            })
                         })
                     })
                 })

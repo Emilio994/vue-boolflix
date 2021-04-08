@@ -239,6 +239,11 @@ body {
 }
 .focus_movie .focus_starring .actors5 {
   margin-right: 5px;
+  font-style: italic;
+}
+.focus_movie .focus_starring .movie_genre {
+  margin-right: 5px;
+  font-style: italic;
 }
 
 
