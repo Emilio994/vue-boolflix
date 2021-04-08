@@ -16,7 +16,7 @@
     <div id='root'>
       <div class="whole-wrapper">
         <!-- Header Wrapper -->
-        <div :style='(wholeFocus == true) ? "opacity : 0.4" : null' class="header-wrapper">
+        <div :style='(wholeFocus == true) ? "opacity : 0.2" : null' class="header-wrapper">
           <img @click='reloadPage'src="img/boolflix.png" alt="">
 
           <div class="selezione">
@@ -41,7 +41,7 @@
           </div>
           
           <!-- Movie template -->
-          <div :style='(wholeFocus == true) ? "opacity : 0.4" : null' v-for='(movie, index) in myMovies' class="movie-template">
+          <div :style='(wholeFocus == true) ? "opacity : 0.2" : null' v-for='(movie, index) in myMovies' class="movie-template">
 
             <!-- Poster -->
             <div class="poster_container">
