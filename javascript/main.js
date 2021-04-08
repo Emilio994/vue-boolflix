@@ -52,9 +52,10 @@ const app = new Vue ({
                 axios
                 .get(myGenreRequest)
                 .then(result => {
-                    console.log(result)
                     result.data.genres.forEach(element => {
-                        movie.genres.push(element.name);
+                        if (result.data.genres.length > 0) {
+                            movie.genres.push(element.name);
+                        };                        
                     });
                 });
             });
@@ -64,7 +65,6 @@ const app = new Vue ({
         axios
         .get('https://api.themoviedb.org/3/genre/movie/list?api_key=9d3349e61a70c22260c6a2009d12ddf7&language=it-IT')
         .then(result => {
-            console.log(result)
             let foundGenres = result.data.genres;
             foundGenres.forEach(element => {
                 if (!this.allGenres.includes(element.name)) {this.allGenres.push(element.name)}
@@ -151,10 +151,11 @@ const app = new Vue ({
                         .get(myGenreRequest)
                         .then(result => {
                             result.data.genres.forEach(element => {
-                                movie.genres.push(element.name);
+                                if (result.data.genres.length > 0) {
+                                    movie.genres.push(element.name);
+                                };                                
                             });
                         });
-
                     });
                 });
                 
@@ -169,10 +170,10 @@ const app = new Vue ({
 
             for (let i = 0; i < myRating; i++) {
                 myStars += '<i class="fas fa-star"></i>'
-            }
+            };
             for (let i = 0; i < myRest; i++) {
                 myStars += '<i class="far fa-star"></i>'
-            }
+            };
             return myStars;
         },
 
@@ -187,8 +188,8 @@ const app = new Vue ({
         },
 
         reloadPage() {
-            this.mySelect = 'Home'
-            location.reload()
+            this.mySelect = 'Home';
+            location.reload();
         },
 
         tabFocus(movie) {
@@ -224,18 +225,17 @@ const app = new Vue ({
             let selector = this.mySelect;
             if(selector == 'Home') {
                 location.reload();
-            }
+            };
             let tmp = [];
 
             movieArray.forEach(movie => {
                 if (movie.genres.includes(selector)) {
                     tmp.push(movie);
-                }               
-            })       
+                } ;              
+            });      
             this.myMovies = tmp;
         }
-    },
-    
+    }
 })
 
 
