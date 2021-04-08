@@ -25,8 +25,7 @@ const app = new Vue ({
                 element.actors = [];
                 element.genres = [];
                 this.myMovies.push(element);
-                
-            })
+            });
         })
         .finally(() => {
             this.myMovies.forEach(movie => {
@@ -46,8 +45,8 @@ const app = new Vue ({
                     if (movieCast.length > 0) {
                         for (let i = 0; i < 5; i++) {
                             movie.actors.push(movieCast[i].name)
-                        }     
-                    }   
+                        };    
+                    };   
                 });
                 // Richiesta generi (dei miei risultati)
                 axios
@@ -56,9 +55,9 @@ const app = new Vue ({
                     console.log(result)
                     result.data.genres.forEach(element => {
                         movie.genres.push(element.name);
-                    })
-                })
-            })
+                    });
+                });
+            });
         });
 
         // Movie Genres (tutti i generi disponibili)
@@ -69,8 +68,9 @@ const app = new Vue ({
             let foundGenres = result.data.genres;
             foundGenres.forEach(element => {
                 if (!this.allGenres.includes(element.name)) {this.allGenres.push(element.name)}
-            })
+            });
         });
+
         // TV-Series Genres (tutti i generi disponibili)
         axios
         .get('https://api.themoviedb.org/3/genre/tv/list?api_key=9d3349e61a70c22260c6a2009d12ddf7&language=it-IT')
@@ -80,7 +80,7 @@ const app = new Vue ({
                 if (!this.allGenres.includes(element.name)) {this.allGenres.push(element.name)}
             });
 
-        })    
+        });  
     },
 
 
@@ -134,7 +134,8 @@ const app = new Vue ({
                         let myLanguage = '&language=it-IT';
                         let myCastRequest = myPath + myResultId + myCastParam + myApiKey + myLanguage;
                         let myGenreRequest = myPath + myResultId + '?' + myApiKey + myLanguage;
-                        // Ricerca Cast alla chiamata della funzione
+
+                        // Ricerca Cast dei risultati alla chiamata della funzione
                         axios
                         .get(myCastRequest)
                         .then(result => {
@@ -142,10 +143,10 @@ const app = new Vue ({
                             if (movieCast.length > 0) {
                                 for (let i = 0; i < 5; i++) {
                                     movie.actors.push(movieCast[i].name)
-                                }     
-                            }         
+                                };    
+                            };        
                         });
-                        // Ricerca Generi alla chiamata della funzione
+                        // Ricerca Generi dei risultati alla chiamata della funzione
                         axios
                         .get(myGenreRequest)
                         .then(result => {

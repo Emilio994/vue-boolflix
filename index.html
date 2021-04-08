@@ -21,14 +21,14 @@
 
           <div class="selezione">
             <label for="genre_selection">Filtra la ricerca per genere :</label>
-            <select v-model='mySelect' @change='contentSelection' name='genre_selection' id="">
+            <select @click='clearAll' v-model='mySelect' @change='contentSelection' name='genre_selection' id="">
               <option value="Home"> Home </option>
               <option v-for='genre in allGenres' :value='genre'> {{ genre }}</option>
             </select>
           </div>
 
           <div class="searchgroup">
-            <input @click='clearAll'@keyup.enter='sendQuery' v-model='mySearch' type="text">
+            <input @click='clearAll' @keyup.enter='sendQuery' v-model='mySearch' type="text">
             <button @click='sendQuery'><i class="fas fa-search"></i></button>
           </div>
           
