@@ -19,7 +19,7 @@
         <div :style='(wholeFocus == true) ? "opacity : 0.4" : null' class="header-wrapper">
           <img @click='reloadPage'src="img/boolflix.png" alt="">
           <div class="searchgroup">
-            <input @keyup.enter='sendQuery' v-model='mySearch' type="text">
+            <input @click='clearAll'@keyup.enter='sendQuery' v-model='mySearch' type="text">
             <button @click='sendQuery'><i class="fas fa-search"></i></button>
           </div>
           
@@ -72,7 +72,10 @@
             <div class ='stars' v-html='"Rating : " + starsRating(movie)'></div>
             
             <div class="focus_starring">
-              <div><span>5 Actors name & surname</span></div>
+              <div>
+                <span v-if='movie.actors.length > 0' class='actors5' v-for='(actor, index) in movie.actors'> {{ actor }}, </span>
+                <span v-else>No cast registered</span>
+              </div>
               <div><span>Genre tags</span></div>
 
 

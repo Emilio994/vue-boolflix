@@ -19,11 +19,32 @@ const app = new Vue ({
         .then(result => {
             result.data.results.forEach(element => {
                 element.onFocus = false;
+                element.actors = [];
                 this.myMovies.push(element);
-                console.log(element)
+                
             })
         })
-
+        .finally(() => {
+            this.myMovies.forEach(movie => {
+                let myPath = 'https://api.themoviedb.org/3/movie/';
+                let myResultId = movie.id;
+                let myParam = '/credits?'
+                let myApiKey = 'api_key=9d3349e61a70c22260c6a2009d12ddf7';
+                let myLanguage = '&language=it-IT';
+                let myRequest = myPath + myResultId + myParam + myApiKey + myLanguage;                
+                axios
+                .get(myRequest)
+                .then(result => {
+                    // console.log(result.data.cast)
+                    let movieCast = result.data.cast;
+                    for (let i = 0; i < 5; i++) {
+                        // console.log(movieCast[i].name)
+                        movie.actors.push(movieCast[i].name)
+                    }            
+                })
+            })
+        })
+        
     },
 
     methods : {
@@ -49,6 +70,7 @@ const app = new Vue ({
                 .then(result => {
                     result.data.results.forEach(element => {
                         element.onFocus = false;
+                        element.actors = [];
                         this.myMovies.push(element);                                 
                     });
                 });
@@ -59,9 +81,34 @@ const app = new Vue ({
                 .then(result => {
                     result.data.results.forEach(element => {
                         element.onFocus = false;
+                        element.actors = [];
                         this.myMovies.push(element);
                     });
-                });             
+                
+                })
+                .finally(() => {
+                    this.myMovies.forEach(movie => {
+                        let myPath = 'https://api.themoviedb.org/3/movie/';
+                        let myResultId = movie.id;
+                        let myParam = '/credits?'
+                        let myApiKey = 'api_key=9d3349e61a70c22260c6a2009d12ddf7';
+                        let myLanguage = '&language=it-IT';
+                        let myRequest = myPath + myResultId + myParam + myApiKey + myLanguage;              
+                        axios
+                        .get(myRequest)
+                        .then(result => {
+                            console.log(result.data.cast)
+                            let movieCast = result.data.cast;
+                            for (let i = 0; i < 5; i++) {
+                                console.log(movieCast[i].name)
+                                movie.actors.push(movieCast[i].name)
+                            }            
+                        })
+                    })
+                })
+                
+                // Ricerca attori
+                
             };
         }, 
 
@@ -112,6 +159,13 @@ const app = new Vue ({
                 movie.onFocus = false
                 app.wholeFocus = false;
             }, 100)
+        },
+        clearAll() {
+            let app = this;
+            app.wholeFocus = false;
+            app.myMovies.forEach(movie => {
+                movie.onFocus = false;
+            })
         }
 
 

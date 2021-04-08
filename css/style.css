@@ -211,13 +211,18 @@ body {
 }
 .focus_movie .focus_title {
   text-align: center;
-  height: 30%;
+  height: 35%;
   width: 100%;
+  overflow: auto;
+}
+.focus_movie .focus_title::-webkit-scrollbar {
+  width: 3px;
 }
 .focus_movie .focus_title h2 {
   font-size: 40px;
 }
 .focus_movie .focus_description {
+  padding: 10px 0px;
   width: 90%;
   height: 40%;
   margin: 0 auto;
@@ -231,6 +236,9 @@ body {
 }
 .focus_movie .stars {
   margin-top: 15px;
+}
+.focus_movie .focus_starring .actors5 {
+  margin-right: 5px;
 }
 
 
