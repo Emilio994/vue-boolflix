@@ -74,7 +74,7 @@
             <div class="focus_starring">
               <div>
                 <span v-if='movie.actors.length > 0' class='actors5' v-for='(actor, index) in movie.actors'> {{ actor }}, </span>
-                <span v-else>No cast registered</span>
+                <span v-else-if='movie.actors.length == 0'>No cast registered</span>
               </div>
               <div><span>Genre tags</span></div>
 
