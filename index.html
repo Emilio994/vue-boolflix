@@ -18,9 +18,15 @@
         <!-- Header Wrapper -->
         <div :style='(wholeFocus == true) ? "opacity : 0.4" : null' class="header-wrapper">
           <img @click='reloadPage'src="img/boolflix.png" alt="">
-          <select  id="">
-            <option value=""></option>
-          </select>
+
+          <div class="selezione">
+            <label for="genre_selection">Selezione per genere :</label>
+            <select v-model='mySelect' @change='contentSelection' name='genre_selection' id="">
+              <option value="Home"> Home </option>
+              <option v-for='genre in allGenres' :value='genre'> {{ genre }}</option>
+            </select>
+          </div>
+
           <div class="searchgroup">
             <input @click='clearAll'@keyup.enter='sendQuery' v-model='mySearch' type="text">
             <button @click='sendQuery'><i class="fas fa-search"></i></button>
@@ -52,7 +58,7 @@
               <div class ='stars' v-html='starsRating(movie)'></div>
               <div class="movie-description">
                 <p class="movie_text filled" v-if='movie.overview != ""'> {{ movie.overview }}</p>
-                <p v-else class="movie_text"> No description</p>
+                <p style='color : red' v-else class="movie_text"> No description</p>
               </div>            
             </div>            
           </div> 
@@ -70,7 +76,7 @@
             </div>
             <div class="focus_description">
               <p v-if='movie.overview != ""'> {{ movie.overview }}</p>
-              <p v-else class="movie_text"> No description</p>
+              <p v-else class="movie_text" style='color : red'> No description</p>
             </div>
             <div class ='stars' v-html='"Rating : " + starsRating(movie)'></div>
             

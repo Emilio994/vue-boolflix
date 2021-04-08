@@ -11,7 +11,8 @@ const app = new Vue ({
         allGenres : [],
         languages404 : ['zh','xx','ko','ur','hi','cs'],
         myPosterPath : 'https://image.tmdb.org/t/p/w342',
-        wholeFocus : false
+        wholeFocus : false,
+        mySelect : 'Home'
     },
 
     mounted() {
@@ -58,12 +59,26 @@ const app = new Vue ({
         });
         // Movie Genres
         axios
-        .get('https://api.themoviedb.org/3/genre/movie/list?api_key=9d3349e61a70c22260c6a2009d12ddf7')
+        .get('https://api.themoviedb.org/3/genre/movie/list?api_key=9d3349e61a70c22260c6a2009d12ddf7&language=it-IT')
         .then(result => {
-            console.log(result.data.genres)
-        })
-        
+            let foundGenres = result.data.genres;
+            foundGenres.forEach(element => {
+                if (!this.allGenres.includes(element.name)) {this.allGenres.push(element.name)}
+            })
+        });
+        // TV-Series Genres
+        axios
+        .get('https://api.themoviedb.org/3/genre/tv/list?api_key=9d3349e61a70c22260c6a2009d12ddf7&language=it-IT')
+        .then(result => {
+            let tvGenres = result.data.genres;
+            tvGenres.forEach(element => {
+                if (!this.allGenres.includes(element.name)) {this.allGenres.push(element.name)}
+            });
+
+        }); 
+        console.log(this.myMovies);       
     },
+
 
     methods : {
         sendQuery() {
@@ -119,10 +134,8 @@ const app = new Vue ({
                         axios
                         .get(myCastRequest)
                         .then(result => {
-                            console.log(result.data.cast)
                             let movieCast = result.data.cast;
                             for (let i = 0; i < 5; i++) {
-                                console.log(movieCast[i].name)
                                 movie.actors.push(movieCast[i].name)
                             }            
                         });
@@ -178,7 +191,7 @@ const app = new Vue ({
             let myWait = setTimeout(function() {
                 movie.onFocus = true;
                 app.wholeFocus = true;
-            }, 150)         
+            }, 150);         
         },
 
         tabClose(movie) {
@@ -186,14 +199,31 @@ const app = new Vue ({
             let myWait = setTimeout(function() {
                 movie.onFocus = false
                 app.wholeFocus = false;
-            }, 100)
+            }, 100);
         },
+
         clearAll() {
             let app = this;
             app.wholeFocus = false;
             app.myMovies.forEach(movie => {
                 movie.onFocus = false;
-            })
+            });
+        },
+
+        contentSelection() {
+            let movieArray = this.myMovies
+            let selector = this.mySelect;
+            if(selector == 'Home') {
+                location.reload();
+            }
+            let tmp = [];
+
+            movieArray.forEach(movie => {
+                if (movie.genres.includes(selector)) {
+                    tmp.push(movie);
+                }               
+            })       
+            this.myMovies = tmp;
         }
 
 

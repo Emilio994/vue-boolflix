@@ -44,7 +44,7 @@ body {
 }
 .header-wrapper select {
   align-self: center;
-  width: 20%;
+  width: fit-content;
 }
 .header-wrapper .searchgroup input {
   margin-right: 10px;
