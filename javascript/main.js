@@ -8,12 +8,14 @@ const app = new Vue ({
     data : {
         mySearch : '',
         myMovies : [],
+        allGenres : [],
         languages404 : ['zh','xx','ko','ur','hi','cs'],
         myPosterPath : 'https://image.tmdb.org/t/p/w342',
         wholeFocus : false
     },
 
     mounted() {
+        // Homepage
         axios
         .get('https://api.themoviedb.org/3/search/movie?api_key=9d3349e61a70c22260c6a2009d12ddf7&language=it-IT&query=best')
         .then(result => {
@@ -33,7 +35,9 @@ const app = new Vue ({
                 let myApiKey = 'api_key=9d3349e61a70c22260c6a2009d12ddf7';
                 let myLanguage = '&language=it-IT';
                 let myCastRequest = myPath + myResultId + myCastParam + myApiKey + myLanguage;
-                let myGenreRequest = myPath + myResultId + '?' + myApiKey + myLanguage;             
+                let myGenreRequest = myPath + myResultId + '?' + myApiKey + myLanguage;
+
+                // Richiesta attori
                 axios
                 .get(myCastRequest)
                 .then(result => {
@@ -42,6 +46,7 @@ const app = new Vue ({
                         movie.actors.push(movieCast[i].name)
                     }            
                 });
+                // Richiesta generi
                 axios
                 .get(myGenreRequest)
                 .then(result => {
@@ -50,6 +55,12 @@ const app = new Vue ({
                     })
                 })
             })
+        });
+        // Movie Genres
+        axios
+        .get('https://api.themoviedb.org/3/genre/movie/list?api_key=9d3349e61a70c22260c6a2009d12ddf7')
+        .then(result => {
+            console.log(result.data.genres)
         })
         
     },
@@ -103,7 +114,8 @@ const app = new Vue ({
                         let myApiKey = 'api_key=9d3349e61a70c22260c6a2009d12ddf7';
                         let myLanguage = '&language=it-IT';
                         let myCastRequest = myPath + myResultId + myCastParam + myApiKey + myLanguage;
-                        let myGenreRequest = myPath + myResultId + '?' + myApiKey + myLanguage;              
+                        let myGenreRequest = myPath + myResultId + '?' + myApiKey + myLanguage;
+                        // Ricerca Cast alla chiamata della funzione
                         axios
                         .get(myCastRequest)
                         .then(result => {
@@ -114,6 +126,7 @@ const app = new Vue ({
                                 movie.actors.push(movieCast[i].name)
                             }            
                         });
+                        // Ricerca Generi alla chiamata della funzione
                         axios
                         .get(myGenreRequest)
                         .then(result => {
@@ -122,9 +135,7 @@ const app = new Vue ({
                             })
                         })
                     })
-                })
-                
-                // Ricerca attori
+                });
                 
             };
         }, 

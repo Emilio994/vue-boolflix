@@ -18,6 +18,9 @@
         <!-- Header Wrapper -->
         <div :style='(wholeFocus == true) ? "opacity : 0.4" : null' class="header-wrapper">
           <img @click='reloadPage'src="img/boolflix.png" alt="">
+          <select  id="">
+            <option value=""></option>
+          </select>
           <div class="searchgroup">
             <input @click='clearAll'@keyup.enter='sendQuery' v-model='mySearch' type="text">
             <button @click='sendQuery'><i class="fas fa-search"></i></button>
@@ -72,11 +75,15 @@
             <div class ='stars' v-html='"Rating : " + starsRating(movie)'></div>
             
             <div class="focus_starring">
-              <div>Cast : 
-                <span v-if='movie.actors.length > 0' class='actors5' v-for='(actor, index) in movie.actors'> {{ actor }}, </span>
-                <span v-else-if='movie.actors.length == 0'>No cast registered</span>
+              <div>Cast :
+                <span style='color : red' v-if='movie.actors.length == 0'>No cast registered</span> 
+                <span v-else='movie.actors.length > 0' class='actors5' v-for='(actor, index) in movie.actors'> {{ actor }}, </span>
+                
               </div>
-              <div>Genere : <span v-for='(genre, index) in movie.genres' class='movie_genre'> {{ genre }}</span></div>
+              <div>Genere : 
+                <span style='color : red' v-if='movie.genres.length == 0'>No genre registered</span>
+                <span v-else v-for='(genre, index) in movie.genres' class='movie_genre'> {{ genre.toUpperCase() }}</span>
+              </div>
 
 
             </div>
