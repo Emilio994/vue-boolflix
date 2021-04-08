@@ -13,12 +13,9 @@ const app = new Vue ({
         myPosterPath : 'https://image.tmdb.org/t/p/w342',
         wholeFocus : false,
         mySelect : 'Home',
-        readyStatus : false 
-        /*l'intero contenuto della root verrà montato quando questo stato passerà a true, renderizzando l'istanza alla soddisfazione della promessa (finally) di axios, permettendo di raccogliere le informazioni necessarie prima della composizione */
     },
 
     mounted() {
-        let myApp = this;
         // Homepage
         axios
         .get('https://api.themoviedb.org/3/search/movie?api_key=9d3349e61a70c22260c6a2009d12ddf7&language=it-IT&query=best')
@@ -41,35 +38,40 @@ const app = new Vue ({
                 let myCastRequest = myPath + myResultId + myCastParam + myApiKey + myLanguage;
                 let myGenreRequest = myPath + myResultId + '?' + myApiKey + myLanguage;
 
-                // Richiesta attori
+                // Richiesta attori (dei miei risultati)
                 axios
                 .get(myCastRequest)
                 .then(result => {
                     let movieCast = result.data.cast;
-                    for (let i = 0; i < 5; i++) {
-                        movie.actors.push(movieCast[i].name)
-                    }            
+                    if (movieCast.length > 0) {
+                        for (let i = 0; i < 5; i++) {
+                            movie.actors.push(movieCast[i].name)
+                        }     
+                    }   
                 });
-                // Richiesta generi
+                // Richiesta generi (dei miei risultati)
                 axios
                 .get(myGenreRequest)
                 .then(result => {
+                    console.log(result)
                     result.data.genres.forEach(element => {
                         movie.genres.push(element.name);
                     })
                 })
             })
         });
-        // Movie Genres
+
+        // Movie Genres (tutti i generi disponibili)
         axios
         .get('https://api.themoviedb.org/3/genre/movie/list?api_key=9d3349e61a70c22260c6a2009d12ddf7&language=it-IT')
         .then(result => {
+            console.log(result)
             let foundGenres = result.data.genres;
             foundGenres.forEach(element => {
                 if (!this.allGenres.includes(element.name)) {this.allGenres.push(element.name)}
             })
         });
-        // TV-Series Genres
+        // TV-Series Genres (tutti i generi disponibili)
         axios
         .get('https://api.themoviedb.org/3/genre/tv/list?api_key=9d3349e61a70c22260c6a2009d12ddf7&language=it-IT')
         .then(result => {
@@ -78,21 +80,14 @@ const app = new Vue ({
                 if (!this.allGenres.includes(element.name)) {this.allGenres.push(element.name)}
             });
 
-        })
-        .finally(() => {
-            myApp.readyStatus = true;
-
-        })     
+        })    
     },
 
 
     methods : {
         sendQuery() {
-            let myApp = this;
-            myApp.readyStatus = false;
             if (this.mySearch == '') {
                 this.myMovies = [];
-                myApp.readyStatus = true;
             }
             else {
                 // Predisposizione fattori di ricerca
@@ -144,9 +139,11 @@ const app = new Vue ({
                         .get(myCastRequest)
                         .then(result => {
                             let movieCast = result.data.cast;
-                            for (let i = 0; i < 5; i++) {
-                                movie.actors.push(movieCast[i].name)
-                            }            
+                            if (movieCast.length > 0) {
+                                for (let i = 0; i < 5; i++) {
+                                    movie.actors.push(movieCast[i].name)
+                                }     
+                            }         
                         });
                         // Ricerca Generi alla chiamata della funzione
                         axios
@@ -156,7 +153,6 @@ const app = new Vue ({
                                 movie.genres.push(element.name);
                             });
                         });
-                        myApp.readyStatus = true;
 
                     });
                 });
@@ -237,8 +233,6 @@ const app = new Vue ({
             })       
             this.myMovies = tmp;
         }
-
-
     },
     
 })
