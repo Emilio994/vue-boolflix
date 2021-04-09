@@ -18,7 +18,7 @@ const app = new Vue ({
     mounted() {
         // Homepage
         axios
-        .get('https://api.themoviedb.org/3/search/movie?api_key=9d3349e61a70c22260c6a2009d12ddf7&language=it-IT&query=best')
+        .get('https://api.themoviedb.org/3/movie/popular?api_key=9d3349e61a70c22260c6a2009d12ddf7&language=it-IT')
         .then(result => {
             result.data.results.forEach(element => {
                 element.onFocus = false;
@@ -43,7 +43,7 @@ const app = new Vue ({
                 .then(result => {
                     let movieCast = result.data.cast;
                     if (movieCast.length > 0) {
-                        for (let i = 0; i < 5; i++) {
+                        for (let i = 0; i < 5 && i < movieCast.length; i++) {
                             movie.actors.push(movieCast[i].name)
                         };    
                     };   
