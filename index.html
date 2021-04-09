@@ -36,7 +36,7 @@
         </div>
 
         <!-- Body Wrapper -->
-        <div class='search_infos'>
+        <div :style='(wholeFocus == true) ? "opacity : 0.2" : null' class='search_infos'>
           <h1 v-if='requestsIndex.length === 0'>Popular on Boolflix</h1>
           <h1 v-else> Results for : {{ requestsIndex[0] }} </h1>
         </div>
@@ -99,7 +99,7 @@
             <div class="focus_starring">
 
               <div class ='stars' v-html='"Rating : " + starsRating(movie)'></div>
-              
+
               <div>Cast :
                 <span style='color : red' v-if='movie.actors.length == 0'>No cast registered</span> 
                 <span v-else='movie.actors.length > 0' class='actors5' v-for='(actor, index) in movie.actors'> {{ actor }}, </span>                
