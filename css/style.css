@@ -102,7 +102,19 @@ body {
 }
 
 
-/* Body-wrapper */  
+/* Body-wrapper */ 
+.search_infos {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  height: 15vh;
+  color: red;
+}
+.search_infos h1 {
+  font-size: 45px;
+  filter: drop-shadow(0px 0px 1px white);
+}
 .body-wrapper {
   width: 100%;
   padding : 10px;

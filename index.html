@@ -35,9 +35,14 @@
         </div>
 
         <!-- Body Wrapper -->
+        <div class='search_infos'>
+          <h1 v-if='requestsIndex.length === 0'>Popular on Boolflix</h1>
+          <h1 v-else> Results for : {{ requestsIndex[0] }} </h1>
+        </div>
+
         <div class="body-wrapper">
           <div v-if='myResults.length == 0' class="nothing_displayed">
-            <h1>Please search a movie</h1>
+            <h1>No results found</h1>
           </div>
           
           <!-- Movie template -->

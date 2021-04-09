@@ -12,7 +12,8 @@ const app = new Vue ({
         languages404 : ['zh','xx','ko','ur','hi','cs'],
         myPosterPath : 'https://image.tmdb.org/t/p/w342',
         wholeFocus : false,
-        mySelect : 'None'
+        mySelect : 'None',
+        requestsIndex : []
     },
 
     mounted() {
@@ -85,6 +86,9 @@ const app = new Vue ({
 
     methods : {
         sendQuery() {
+            this.mySelect = 'None';
+            this.requestsIndex = [];
+            this.requestsIndex.push(this.mySearch);
             if (this.mySearch == '') {
                 this.myResults = [];
             }
@@ -230,7 +234,7 @@ const app = new Vue ({
                 if (movie.genres.includes(selector)) {
                     tmp.push(movie);
                 } ;              
-            });      
+            });     
             this.myResults = tmp;
         }
     }
