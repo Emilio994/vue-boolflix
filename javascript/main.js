@@ -8,6 +8,7 @@ const app = new Vue ({
     data : {
         mySearch : '',
         myResults : [],
+        savedResults : [],
         allGenres : [],
         languages404 : ['zh','xx','ko','ur','hi','cs'],
         myPosterPath : 'https://image.tmdb.org/t/p/w342',
@@ -80,6 +81,7 @@ const app = new Vue ({
                     });
                 });
             });
+            this.savedResults = this.myResults;
         });
     },
 
@@ -160,6 +162,7 @@ const app = new Vue ({
                             });
                         });
                     });
+                    this.savedResults = this.myResults;
                 });
             };
         }, 
@@ -223,19 +226,19 @@ const app = new Vue ({
         },
 
         contentSelection() {
-            let movieArray = this.myResults
+            this.myResults = this.savedResults;
+            let movieArray = this.myResults;
             let selector = this.mySelect;
-            if(selector == 'None') {
-                location.reload();
-            };
             let tmp = [];
 
-            movieArray.forEach(movie => {
-                if (movie.genres.includes(selector)) {
-                    tmp.push(movie);
-                } ;              
-            });     
-            this.myResults = tmp;
+            if (selector != 'None') {
+                movieArray.forEach(movie => {
+                    if (movie.genres.includes(selector)) {
+                        tmp.push(movie);
+                    };              
+                });     
+                this.myResults = tmp;
+            };
         }
     }
 })
