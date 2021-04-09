@@ -83,6 +83,12 @@ const app = new Vue ({
             });
             this.savedResults = this.myResults;
         });
+        window.addEventListener('keyup', function(event){
+            let key = event.key;
+            if (key === 'Escape') {
+                app.clearAll();
+            }
+        });
     },
 
 
@@ -241,7 +247,7 @@ const app = new Vue ({
             };
         }
     }
-})
+});
 
 
 
