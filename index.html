@@ -36,12 +36,12 @@
 
         <!-- Body Wrapper -->
         <div class="body-wrapper">
-          <div v-if='myMovies.length == 0' class="nothing_displayed">
+          <div v-if='myResults.length == 0' class="nothing_displayed">
             <h1>Please search a movie</h1>
           </div>
           
           <!-- Movie template -->
-          <div :style='(wholeFocus == true) ? "opacity : 0.2" : null' v-for='(movie, index) in myMovies' class="movie-template">
+          <div :style='(wholeFocus == true) ? "opacity : 0.2" : null' v-for='(movie, index) in myResults' class="movie-template">
 
             <!-- Poster -->
             <div class="poster_container">
@@ -64,7 +64,7 @@
           </div> 
 
           <!-- Focus Template -->
-          <div v-if='movie.onFocus == true' class="focus_movie" v-for='(movie, index) in myMovies'>
+          <div v-if='movie.onFocus == true' class="focus_movie" v-for='(movie, index) in myResults'>
             <div class="focus_close">
               <i @click='tabClose(movie)' class="fas fa-times"></i>
             </div>

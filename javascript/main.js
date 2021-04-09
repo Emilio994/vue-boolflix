@@ -7,7 +7,7 @@ const app = new Vue ({
     el : '#root',
     data : {
         mySearch : '',
-        myMovies : [],
+        myResults : [],
         allGenres : [],
         languages404 : ['zh','xx','ko','ur','hi','cs'],
         myPosterPath : 'https://image.tmdb.org/t/p/w342',
@@ -44,11 +44,11 @@ const app = new Vue ({
                 element.onFocus = false;
                 element.actors = [];
                 element.genres = [];
-                this.myMovies.push(element);
+                this.myResults.push(element);
             });
         })
         .finally(() => {
-            this.myMovies.forEach(movie => {
+            this.myResults.forEach(movie => {
                 let myPath = 'https://api.themoviedb.org/3/movie/';
                 let myResultId = movie.id;
                 let myCastParam = '/credits?'
@@ -86,7 +86,7 @@ const app = new Vue ({
     methods : {
         sendQuery() {
             if (this.mySearch == '') {
-                this.myMovies = [];
+                this.myResults = [];
             }
             else {
                 // Predisposizione fattori di ricerca
@@ -97,7 +97,7 @@ const app = new Vue ({
                 let myLanguage = '&language=it-IT'
                 let searchMovieQuery = searchMovie + myApiKey + myLanguage + myQuery + this.mySearch;
                 let searchTvSerieQuery = searchTvSerie + myApiKey + myLanguage + myQuery + this.mySearch;
-                this.myMovies = [];
+                this.myResults = [];
                 this.mySearch = '';
                 
                 // Ricerca Film
@@ -108,7 +108,7 @@ const app = new Vue ({
                         element.onFocus = false;
                         element.actors = [];
                         element.genres = [];
-                        this.myMovies.push(element);                                 
+                        this.myResults.push(element);                                 
                     });
                 });
 
@@ -120,11 +120,11 @@ const app = new Vue ({
                         element.onFocus = false;
                         element.actors = [];
                         element.genres = [];
-                        this.myMovies.push(element);
+                        this.myResults.push(element);
                     });
                 })
                 .finally(() => {
-                    this.myMovies.forEach(movie => {
+                    this.myResults.forEach(movie => {
                         let myPath = 'https://api.themoviedb.org/3/movie/';
                         let myResultId = movie.id;
                         let myCastParam = '/credits?'
@@ -192,7 +192,7 @@ const app = new Vue ({
 
         tabFocus(movie) {
             let app = this;
-            this.myMovies.forEach(element =>{
+            this.myResults.forEach(element =>{
                 element.onFocus = false;
                 app.wholeFocus = false;
             })
@@ -213,13 +213,13 @@ const app = new Vue ({
         clearAll() {
             let app = this;
             app.wholeFocus = false;
-            app.myMovies.forEach(movie => {
+            app.myResults.forEach(movie => {
                 movie.onFocus = false;
             });
         },
 
         contentSelection() {
-            let movieArray = this.myMovies
+            let movieArray = this.myResults
             let selector = this.mySelect;
             if(selector == 'None') {
                 location.reload();
@@ -231,7 +231,7 @@ const app = new Vue ({
                     tmp.push(movie);
                 } ;              
             });      
-            this.myMovies = tmp;
+            this.myResults = tmp;
         }
     }
 })
