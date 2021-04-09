@@ -229,9 +229,9 @@ body {
 }
 .focus_close {
   text-align: end;
-  margin: -1px 5px;
 }
 .focus_close i  {
+  margin-right: 7px;
   text-align: end;
   color: white;
   font-size: 25px;
@@ -254,13 +254,14 @@ body {
 }
 .focus_movie .focus_title h2 {
   font-size: 40px;
-  color: lightcoral;
+  color: rgba(255,0,0,0.7);
+  margin-bottom: 5px;
 }
 .focus_movie .focus_title h4 {
   color: lightgrey;
+  margin-bottom: 10px;
 }
 .focus_movie .focus_description {
-  padding: 10px 0px;
   width: 90%;
   height: 40%;
   margin: 0 auto;
@@ -272,8 +273,9 @@ body {
 .focus_movie .focus_description .movie_text {
   text-align: center;
 }
-.focus_movie .stars {
+.focus_movie .focus_starring {
   margin-top: 15px;
+  margin-left: 15px;
 }
 .focus_movie .focus_starring .actors5 {
   margin-right: 5px;

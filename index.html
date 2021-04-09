@@ -17,6 +17,7 @@
       <div class="whole-wrapper">
         <!-- Header Wrapper -->
         <div :style='(wholeFocus == true) ? "opacity : 0.2" : null' class="header-wrapper">
+
           <img @click='reloadPage'src="img/boolflix.png" alt="">
 
           <div class="selezione">
@@ -56,46 +57,58 @@
 
             <!-- Description -->
             <div class="description_container" @click='tabFocus(movie)'>
+
               <h3>{{ (movie.title != undefined) ? movie.title : movie.name }}</h3>
               <h5>{{ (movie.original_title != undefined) ? movie.original_title : movie.original_name }}</h5>
+
               <p v-if='languages404.includes(movie.original_language)'>{{ movie.original_language.toUpperCase() }}</p>
-              <div><img v-if='!languages404.includes(movie.original_language)' :src='toFlag(movie)' alt="Flag"> </div>
+              <div><img v-if='!languages404.includes(movie.original_language)' :src='toFlag(movie)' alt="Flag"> 
+              </div>
+
               <div class ='stars' v-html='starsRating(movie)'></div>
+
               <div class="movie-description">
                 <p class="movie_text filled" v-if='movie.overview != ""'> {{ movie.overview }}</p>
                 <p style='color : red' v-else class="movie_text"> No description</p>
-              </div>            
+              </div>  
+
             </div>            
           </div> 
 
           <!-- Focus Template -->
           <div v-if='movie.onFocus == true' class="focus_movie" v-for='(movie, index) in myResults'>
+
             <div class="focus_close">
               <i @click='tabClose(movie)' class="fas fa-times"></i>
             </div>
+
             <div class="focus_title">            
               <h2>{{ (movie.title != undefined) ? movie.title : movie.name }}</h2>
               <h4>Titolo originale : {{ (movie.original_title != undefined) ? movie.original_title : movie.original_name }}</h4>
               <p v-if='languages404.includes(movie.original_language)'>{{ movie.original_language.toUpperCase() }}</p>
               <div><img v-if='!languages404.includes(movie.original_language)' :src='toFlag(movie)' alt="Flag"> </div>
             </div>
+
             <div class="focus_description">
               <p v-if='movie.overview != ""'> {{ movie.overview }}</p>
               <p v-else class="movie_text" style='color : red'> No description</p>
             </div>
-            <div class ='stars' v-html='"Rating : " + starsRating(movie)'></div>
+
+            
             
             <div class="focus_starring">
+
+              <div class ='stars' v-html='"Rating : " + starsRating(movie)'></div>
+              
               <div>Cast :
                 <span style='color : red' v-if='movie.actors.length == 0'>No cast registered</span> 
-                <span v-else='movie.actors.length > 0' class='actors5' v-for='(actor, index) in movie.actors'> {{ actor }}, </span>
-                
+                <span v-else='movie.actors.length > 0' class='actors5' v-for='(actor, index) in movie.actors'> {{ actor }}, </span>                
               </div>
+
               <div>Genere : 
                 <span style='color : red' v-if='movie.genres.length == 0'>No genre registered</span>
                 <span v-else v-for='(genre, index) in movie.genres' class='movie_genre'> {{ genre.toUpperCase() }}</span>
               </div>
-
 
             </div>
           </div>
