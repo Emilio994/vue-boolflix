@@ -12,10 +12,30 @@ const app = new Vue ({
         languages404 : ['zh','xx','ko','ur','hi','cs'],
         myPosterPath : 'https://image.tmdb.org/t/p/w342',
         wholeFocus : false,
-        mySelect : 'None',
+        mySelect : 'None'
     },
 
     mounted() {
+        // Movie Genres (tutti i generi disponibili)
+        axios
+        .get('https://api.themoviedb.org/3/genre/movie/list?api_key=9d3349e61a70c22260c6a2009d12ddf7&language=it-IT')
+        .then(result => {
+            let foundGenres = result.data.genres;
+            foundGenres.forEach(element => {
+                if (!this.allGenres.includes(element.name)) {this.allGenres.push(element.name)}
+            });
+        });
+
+        // TV-Series Genres (tutti i generi disponibili)
+        axios
+        .get('https://api.themoviedb.org/3/genre/tv/list?api_key=9d3349e61a70c22260c6a2009d12ddf7&language=it-IT')
+        .then(result => {
+            let tvGenres = result.data.genres;
+            tvGenres.forEach(element => {
+                if (!this.allGenres.includes(element.name)) {this.allGenres.push(element.name)}
+            });
+        });
+
         // Homepage
         axios
         .get('https://api.themoviedb.org/3/movie/popular?api_key=9d3349e61a70c22260c6a2009d12ddf7&language=it-IT')
@@ -60,27 +80,6 @@ const app = new Vue ({
                 });
             });
         });
-
-        // Movie Genres (tutti i generi disponibili)
-        axios
-        .get('https://api.themoviedb.org/3/genre/movie/list?api_key=9d3349e61a70c22260c6a2009d12ddf7&language=it-IT')
-        .then(result => {
-            let foundGenres = result.data.genres;
-            foundGenres.forEach(element => {
-                if (!this.allGenres.includes(element.name)) {this.allGenres.push(element.name)}
-            });
-        });
-
-        // TV-Series Genres (tutti i generi disponibili)
-        axios
-        .get('https://api.themoviedb.org/3/genre/tv/list?api_key=9d3349e61a70c22260c6a2009d12ddf7&language=it-IT')
-        .then(result => {
-            let tvGenres = result.data.genres;
-            tvGenres.forEach(element => {
-                if (!this.allGenres.includes(element.name)) {this.allGenres.push(element.name)}
-            });
-
-        });  
     },
 
 
@@ -145,6 +144,7 @@ const app = new Vue ({
                                 };    
                             };        
                         });
+
                         // Ricerca Generi dei risultati alla chiamata della funzione
                         axios
                         .get(myGenreRequest)
