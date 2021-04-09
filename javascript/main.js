@@ -89,6 +89,9 @@ const app = new Vue ({
                 app.clearAll();
             }
         });
+        window.addEventListener('click', function(){
+            app.clearAll();
+        });
     },
 
 
