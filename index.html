@@ -20,9 +20,9 @@
           <img @click='reloadPage'src="img/boolflix.png" alt="">
 
           <div class="selezione">
-            <label for="genre_selection">Filtra la ricerca per genere :</label>
+            <span name='myFilter'>Genre filter : <i class="fas fa-filter"></i></span>
             <select @click='clearAll' v-model='mySelect' @change='contentSelection' name='genre_selection' id="">
-              <option value="Home"> Home </option>
+              <option value="None"> None </option>
               <option v-for='genre in allGenres' :value='genre'> {{ genre }}</option>
             </select>
           </div>

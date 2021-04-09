@@ -12,7 +12,7 @@ const app = new Vue ({
         languages404 : ['zh','xx','ko','ur','hi','cs'],
         myPosterPath : 'https://image.tmdb.org/t/p/w342',
         wholeFocus : false,
-        mySelect : 'Home',
+        mySelect : 'None',
     },
 
     mounted() {
@@ -186,7 +186,7 @@ const app = new Vue ({
         },
 
         reloadPage() {
-            this.mySelect = 'Home';
+            this.mySelect = 'None';
             location.reload();
         },
 
@@ -221,7 +221,7 @@ const app = new Vue ({
         contentSelection() {
             let movieArray = this.myMovies
             let selector = this.mySelect;
-            if(selector == 'Home') {
+            if(selector == 'None') {
                 location.reload();
             };
             let tmp = [];
