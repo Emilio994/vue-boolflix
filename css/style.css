@@ -216,7 +216,7 @@ body {
   position: fixed;
   height: 60vh;
   width: 60vw;
-  background-color: rgba(48, 48, 48, 0.8);
+  background-color: rgba(0, 0, 0, 0.6);
   color: white;
   box-shadow: 0px 0px 10px 2px grey;
   border: 2px solid grey;

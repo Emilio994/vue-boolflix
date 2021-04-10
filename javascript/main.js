@@ -14,8 +14,7 @@ const app = new Vue ({
         myPosterPath : 'https://image.tmdb.org/t/p/w342',
         wholeFocus : false,
         mySelect : 'None',
-        requestsIndex : [],
-        myTest : [],
+        requestsIndex : []
     },
 
     mounted() {
