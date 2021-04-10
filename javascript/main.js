@@ -14,7 +14,8 @@ const app = new Vue ({
         myPosterPath : 'https://image.tmdb.org/t/p/w342',
         wholeFocus : false,
         mySelect : 'None',
-        requestsIndex : []
+        requestsIndex : [],
+        myTest : [],
     },
 
     mounted() {
@@ -87,7 +88,16 @@ const app = new Vue ({
             let key = event.key;
             if (key === 'Escape') {
                 app.clearAll();
-            }
+            };
+        });
+        window.addEventListener('click', function(event){
+            let tmp = [];
+            event.path.forEach(element => {
+                tmp.push(element.className);
+            });
+            if (!tmp.includes('focus_movie')) {
+                app.clearAll();
+            };
         });
     },
 
